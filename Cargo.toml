@@ -3,7 +3,19 @@ name = "neutron-star-rt"
 version = "0.1.0"
 authors = ["earlz <earlz@earlz.net>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+links = "neutron-star-rt"
+build = "build.rs"
 
 [dependencies]
+
+[profile.dev]
+panic = "abort"
+
+[profile.test]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+opt-level = 'z' 
+lto = true
+codegen-units = 1

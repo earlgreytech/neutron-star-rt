@@ -1,7 +1,9 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+#![no_std]
+#![crate_type = "staticlib"]
+
+extern "C"{
+    pub fn __exit(code: u32) -> !;
+    pub fn __entropy(foo: u32) -> u32;
 }
+
+
