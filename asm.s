@@ -7,7 +7,7 @@
 # .cfi_startproc
 __boot:
   # Address of stack memory
-  ldr r0, =0x81000000
+  ldr r0, =0x81000200
   mov r13, r0
   # Hand execution over to `main`.
   bl main
@@ -20,9 +20,43 @@ __boot:
 .thumb_func
 __exit:
     svc 0xFF
+    # incase of some return from the SVC call, execute it again in an infintie loop
+    b __exit 
 
-.global __entropy
+.global __push_costack
 .section .text
 .thumb_func
-__entropy:
-    svc 0x00
+__push_costack:
+  svc 0x10
+  mov pc, lr
+
+.global __pop_costack
+.section .text
+.thumb_func
+__pop_costack:
+  svc 0x11
+  mov pc, lr
+
+.global __clear_costack
+.section .text
+.thumb_func
+__clear_costack:
+  svc 0x14
+  mov pc, lr
+
+
+.global __system_call
+.section .text
+.thumb_func
+__system_call:
+  svc 0x20
+  mov pc, lr
+
+
+.global __breakpoint
+.section .text
+.thumb_func
+__breakpoint:
+  bkpt
+  mov pc, lr
+
