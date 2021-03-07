@@ -7,7 +7,7 @@
 # .cfi_startproc
 __boot:
   # Address of stack memory
-  ldr r0, =0x81000200
+  ldr r0, =0x81008000
   mov r13, r0
   # Hand execution over to `main`.
   bl main
