@@ -51,25 +51,25 @@ __system_call:
   svc 0x20
   mov pc, lr
   
-.global __push_raw_output
+.global __push_raw_comap
 .section .text
 .thumb_func
-__push_raw_output:
-  svc 0x40
+__push_raw_comap:
+  svc 0x31
   mov pc, lr
   
-.global __peek_raw_input
+.global __peek_raw_comap
 .section .text
 .thumb_func
-__peek_raw_input:
-  svc 0x42
+__peek_raw_comap:
+  svc 0x33
   mov pc, lr
   
-.global __peek_raw_result
+.global __peek_raw_result_comap
 .section .text
 .thumb_func
-__peek_raw_result:
-  svc 0x44
+__peek_raw_result_comap:
+  svc 0x35
   mov pc, lr
 
 .global __breakpoint
