@@ -44,14 +44,33 @@ __clear_costack:
   svc 0x14
   mov pc, lr
 
-
 .global __system_call
 .section .text
 .thumb_func
 __system_call:
   svc 0x20
   mov pc, lr
-
+  
+.global __push_raw_comap
+.section .text
+.thumb_func
+__push_raw_comap:
+  svc 0x31
+  mov pc, lr
+  
+.global __peek_raw_comap
+.section .text
+.thumb_func
+__peek_raw_comap:
+  svc 0x33
+  mov pc, lr
+  
+.global __peek_raw_result_comap
+.section .text
+.thumb_func
+__peek_raw_result_comap:
+  svc 0x35
+  mov pc, lr
 
 .global __breakpoint
 .section .text
