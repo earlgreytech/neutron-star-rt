@@ -12,11 +12,20 @@ extern "C"{
     //SVC 0x14: clear_costack() -- Will clear the stack completely, without giving any information about what was held on the stack
     pub fn __clear_costack();
     
+    //SVC 0x30: push_comap(key: stack [u8], abi_data: u32, value: stack [u8])
+    pub fn __push_comap(abi_data: u32);
+    
     //SVC 0x31: push_raw_comap(key: stack [u8], raw_value: stack [u8])
     pub fn __push_raw_comap();
     
+    //SVC 0x32: peek_comap(key: stack [u8], begin: u32, max_length: u32) -> (abi_data: u32, value: stack [u8])
+    pub fn __peek_comap(begin: usize, max_size: usize) -> u32;
+    
     //SVC 0x33: peek_raw_comap(key: stack [u8], begin: u32, max_length: u32) -> (raw_value: stack [u8])
     pub fn __peek_raw_comap(begin: usize, max_size: usize);
+    
+    //SVC 0x34: peek_result_comap(key: stack [u8], begin: u32, max_length: u32) -> (abi_data: u32, value: stack [u8])
+    pub fn __peek_result_comap(begin: usize, max_size: usize) -> u32;
     
     //SVC 0x35: peek_raw_result_comap(key: stack [u8], begin: u32, max_length: u32) -> (raw_value: stack [u8])
     pub fn __peek_raw_result_comap(begin: usize, max_size: usize);
