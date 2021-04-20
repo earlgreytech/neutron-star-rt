@@ -14,14 +14,10 @@ __boot:
   svc 0xFF
   # Note: `main` must not return. `bl` is used only because it has a wider range than `b`.
   # .cfi_endproc
+  
+# Please try to keep entries in same order here as in lib.rs!
 
-.global __exit
-.section .text
-.thumb_func
-__exit:
-    svc 0xFF
-    # incase of some return from the SVC call, execute it again in an infintie loop
-    b __exit 
+# Costack operators
 
 .global __push_costack
 .section .text
@@ -43,13 +39,8 @@ __pop_costack:
 __clear_costack:
   svc 0x14
   mov pc, lr
-
-.global __system_call
-.section .text
-.thumb_func
-__system_call:
-  svc 0x20
-  mov pc, lr
+  
+# Comap operators
   
 .global __push_comap
 .section .text
@@ -91,6 +82,23 @@ __peek_result_comap:
 .thumb_func
 __peek_raw_result_comap:
   svc 0x35
+  mov pc, lr
+  
+# Misc operators
+  
+.global __exit
+.section .text
+.thumb_func
+__exit:
+    svc 0xFF
+    # incase of some return from the SVC call, execute it again in an infintie loop
+    b __exit 
+    
+.global __system_call
+.section .text
+.thumb_func
+__system_call:
+  svc 0x20
   mov pc, lr
 
 .global __breakpoint
