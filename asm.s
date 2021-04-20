@@ -15,6 +15,13 @@ __boot:
   # Note: `main` must not return. `bl` is used only because it has a wider range than `b`.
   # .cfi_endproc
   
+# To actually test changes made here, do the following: 
+# 1. Run ./assemble.sh
+# 2. Run cargo build
+# 3. In neutron-host run ./hard_rebuild.sh (Hard rebuild seems to occationally be needed to properly re-link stuff)
+# 4. In neutron-host run cargo test
+# 5. Your changes are now in action and, if test passed, you haven't broken anything! 
+  
 # Please try to keep entries in same order here as in lib.rs!
 
 # Costack operators
