@@ -14,14 +14,17 @@ __boot:
   svc 0xFF
   # Note: `main` must not return. `bl` is used only because it has a wider range than `b`.
   # .cfi_endproc
+  
+# To actually test changes made here, do the following: 
+# 1. Run ./assemble.sh
+# 2. Run cargo build
+# 3. In neutron-host run ./hard_rebuild.sh (Hard rebuild seems to occationally be needed to properly re-link stuff)
+# 4. In neutron-host run cargo test
+# 5. Your changes are now in action and, if test passed, you haven't broken anything! 
+  
+# Please try to keep entries in same order here as in lib.rs!
 
-.global __exit
-.section .text
-.thumb_func
-__exit:
-    svc 0xFF
-    # incase of some return from the SVC call, execute it again in an infintie loop
-    b __exit 
+# Costack operators
 
 .global __push_costack
 .section .text
@@ -43,12 +46,14 @@ __pop_costack:
 __clear_costack:
   svc 0x14
   mov pc, lr
-
-.global __system_call
+  
+# Comap operators
+  
+.global __push_comap
 .section .text
 .thumb_func
-__system_call:
-  svc 0x20
+__push_comap:
+  svc 0x30
   mov pc, lr
   
 .global __push_raw_comap
@@ -58,6 +63,13 @@ __push_raw_comap:
   svc 0x31
   mov pc, lr
   
+.global __peek_comap
+.section .text
+.thumb_func
+__peek_comap:
+  svc 0x32
+  mov pc, lr
+  
 .global __peek_raw_comap
 .section .text
 .thumb_func
@@ -65,11 +77,35 @@ __peek_raw_comap:
   svc 0x33
   mov pc, lr
   
+.global __peek_result_comap
+.section .text
+.thumb_func
+__peek_result_comap:
+  svc 0x34
+  mov pc, lr
+  
 .global __peek_raw_result_comap
 .section .text
 .thumb_func
 __peek_raw_result_comap:
   svc 0x35
+  mov pc, lr
+  
+# Misc operators
+  
+.global __exit
+.section .text
+.thumb_func
+__exit:
+    svc 0xFF
+    # incase of some return from the SVC call, execute it again in an infintie loop
+    b __exit 
+    
+.global __system_call
+.section .text
+.thumb_func
+__system_call:
+  svc 0x20
   mov pc, lr
 
 .global __breakpoint
