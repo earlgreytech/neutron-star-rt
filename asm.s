@@ -47,6 +47,13 @@ __clear_costack:
   svc 0x14
   mov pc, lr
   
+.global __forward_input_costack
+.section .text
+.thumb_func
+__forward_input_costack:
+  svc 0x16
+  mov pc, lr
+  
 # Comap operators
   
 .global __push_comap
