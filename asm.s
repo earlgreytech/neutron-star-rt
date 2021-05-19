@@ -47,10 +47,10 @@ __clear_costack:
   svc 0x14
   mov pc, lr
   
-.global __forward_input_costack
+.global __move_input_to_output_costack
 .section .text
 .thumb_func
-__forward_input_costack:
+__move_input_to_output_costack:
   svc 0x16
   mov pc, lr
   
