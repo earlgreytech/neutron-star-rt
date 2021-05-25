@@ -91,6 +91,43 @@ __peek_raw_result_comap:
   svc 0x35
   mov pc, lr
   
+# Context info operators
+
+.global __gas_remaining
+.section .text
+.thumb_func
+__gas_remaining:
+  svc 0x90
+  mov pc, lr
+  
+.global __self_address
+.section .text
+.thumb_func
+__self_address:
+  svc 0x91
+  mov pc, lr
+  
+.global __origin
+.section .text
+.thumb_func
+__origin:
+  svc 0x92
+  mov pc, lr
+  
+.global __sender
+.section .text
+.thumb_func
+__sender:
+  svc 0x94
+  mov pc, lr
+  
+.global __execution_type
+.section .text
+.thumb_func
+__execution_type:
+  svc 0x96
+  mov pc, lr
+  
 # Misc operators
   
 .global __exit

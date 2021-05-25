@@ -35,14 +35,31 @@ extern "C"{
     //SVC 0x32: peek_comap(key: stack [u8], begin: u32, max_length: u32) -> (abi_data: u32, value: stack [u8])
     pub fn __peek_comap(begin: usize, max_size: usize) -> u32;
     
-    //SVC 0x33: peek_raw_comap(key: stack [u8], begin: u32, max_length: u32) -> (raw_value: stack [u8])
+    //SVC 0x33: peek_raw_comap(key: stack [u8], begin: u32, max_length: u32) -> raw_value: stack [u8]
     pub fn __peek_raw_comap(begin: usize, max_size: usize);
     
     //SVC 0x34: peek_result_comap(key: stack [u8], begin: u32, max_length: u32) -> (abi_data: u32, value: stack [u8])
     pub fn __peek_result_comap(begin: usize, max_size: usize) -> u32;
     
-    //SVC 0x35: peek_raw_result_comap(key: stack [u8], begin: u32, max_length: u32) -> (raw_value: stack [u8])
+    //SVC 0x35: peek_raw_result_comap(key: stack [u8], begin: u32, max_length: u32) -> raw_value: stack [u8]
     pub fn __peek_raw_result_comap(begin: usize, max_size: usize);
+    
+    // Context info operators
+    
+    //SVC 0x90: gas_remaining() -> limit: u64 (TODO: Investigate if this has to be split into two u32 or not)
+    pub fn __gas_remaining() -> u64;
+    
+    //SVC 0x91: self_address() -> address: stack NeutronAddress
+    pub fn __self_address();
+    
+    //SVC 0x92: origin() -> address: stack NeutronAddress
+    pub fn __origin();
+    
+    //SVC 0x94: sender() -> address: stack NeutronAddress
+    pub fn __sender();
+    
+    //SVC 0x96: execution_type() -> type: u32
+    pub fn __execution_type() -> u32;
 
     // Misc operators
 
