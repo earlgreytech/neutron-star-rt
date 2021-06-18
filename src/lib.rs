@@ -3,6 +3,8 @@
 
 extern "C"{
     /*
+    For docs see https://neutron.earlgrey.tech/spec/neutron-arm-vm
+    
     To actually test changes made here, do the following: 
     1. Run ./assemble.sh
     2. Run cargo build
@@ -23,6 +25,9 @@ extern "C"{
     
     //SVC 0x14: clear_costack() -- Will clear the stack completely, without giving any information about what was held on the stack
     pub fn __clear_costack();
+    
+    //SVC 0x16: move_input_to_output_costack() -- Move all content from input to output stack. Overwrites previous output stack and leaves input stack empty. 
+    pub fn __move_input_to_output_costack();
     
     // Comap operators
     
